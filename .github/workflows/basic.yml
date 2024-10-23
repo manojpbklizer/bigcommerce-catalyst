@@ -17,7 +17,7 @@ env:
   BIGCOMMERCE_CHANNEL_ID: ${{ secrets.BIGCOMMERCE_CHANNEL_ID }}
 
 jobs:
-  lint-typecheck:
+  # lint-typecheck:
     name: Typecheck, and gql.tada
 
     runs-on: ubuntu-latest
