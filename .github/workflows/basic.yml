@@ -18,7 +18,7 @@ env:
 
 jobs:
   lint-typecheck:
-    name: Lint, Typecheck, and gql.tada
+    name: Typecheck, and gql.tada
 
     runs-on: ubuntu-latest
 
