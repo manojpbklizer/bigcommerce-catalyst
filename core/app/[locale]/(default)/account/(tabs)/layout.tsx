@@ -47,3 +47,4 @@ export default function AccountTabLayout({ children, params: { locale } }: Props
     </>
   );
 }
+
