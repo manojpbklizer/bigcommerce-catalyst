@@ -1,4 +1,4 @@
-'use client';
+ 'use client';
 
 import React, { useEffect } from 'react';
 import { Provider, useDispatch, useSelector } from 'react-redux';
