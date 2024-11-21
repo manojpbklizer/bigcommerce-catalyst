@@ -23,6 +23,8 @@ import { NumberField } from './fields/number-field';
 import { QuantityField } from './fields/quantity-field';
 import { TextField } from './fields/text-field';
 import { ProductFormData, useProductForm } from './use-product-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItemToCart } from '~/lib/redux/features/cart/cartSlice';
 
 interface Props {
   data: FragmentOf<typeof ProductItemFragment>;
@@ -59,6 +61,10 @@ export const Submit = ({ data: product }: Props) => {
 };
 
 export const ProductForm = ({ data: product }: Props) => {
+  const dispatch = useDispatch();
+  const store = useSelector((state) => state?.cart);
+  console.log('Form ~ store:', store);
+
   const t = useTranslations('Product.Form');
   const productOptions = removeEdgesAndNodes(product.productOptions);
 
@@ -104,6 +110,13 @@ export const ProductForm = ({ data: product }: Props) => {
       cart.decrement(quantity);
 
       return;
+    } else {
+      dispatch(
+        addItemToCart({
+          productId: data?.product_id,
+          quantity: Number(data.quantity || 1),
+        }),
+      );
     }
 
     const transformedProduct = productItemTransform(product);

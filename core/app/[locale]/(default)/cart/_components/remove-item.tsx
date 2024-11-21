@@ -11,6 +11,8 @@ import { removeItem } from '../_actions/remove-item';
 
 import { CartItemFragment } from './cart-item';
 import { RemoveFromCartButton } from './remove-from-cart-button';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeItemFromCart } from '~/lib/redux/features/cart/cartSlice';
 
 type FragmentResult = FragmentOf<typeof CartItemFragment>;
 type PhysicalItem = FragmentResult['physicalItems'][number];
@@ -41,6 +43,9 @@ const lineItemTransform = (item: Product) => {
 
 export const RemoveItem = ({ currency, product }: Props) => {
   const t = useTranslations('Cart.SubmitRemoveItem');
+  const dispatch = useDispatch();
+  const cart = useSelector((store) => store?.cart);
+  console.log('🚀 ~ RemoveItem ~ cart:', cart);
 
   const onSubmitRemoveItem = async () => {
     const { status } = await removeItem({
@@ -53,6 +58,8 @@ export const RemoveItem = ({ currency, product }: Props) => {
       });
 
       return;
+    } else {
+      dispatch(removeItemFromCart(String(product.productEntityId)));
     }
 
     bodl.cart.productRemoved({
