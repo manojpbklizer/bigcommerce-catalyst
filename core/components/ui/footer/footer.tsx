@@ -5,6 +5,7 @@ import { Link as CustomLink } from '~/components/link';
 import { cn } from '~/lib/utils';
 
 import { Locale } from './locale';
+import Link from 'next/link';
 
 interface Image {
   altText: string;
@@ -56,7 +57,14 @@ const Footer = ({
       <nav className="grid flex-auto auto-cols-fr gap-8 sm:grid-flow-col">
         {sections.map((section) => (
           <div key={section.title}>
-            <h3 className="mb-4 text-lg font-bold">{section.title}</h3>
+            {section.title === 'Brands' ? (
+              <Link href="/brand" className="mb-4 text-lg font-bold">
+                {section.title}
+              </Link>
+            ) : (
+              <h3 className="mb-4 text-lg font-bold">{section.title}</h3>
+            )}
+
             <ul className="flex flex-col gap-4">
               {section.links.map((link) => (
                 <li key={link.href}>
